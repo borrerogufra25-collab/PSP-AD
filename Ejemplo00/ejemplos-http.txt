@@ -1,0 +1,44 @@
+EJEMPLOS DE PETICIONES HTTP
+
+1. GET - obtener todos
+GET http://localhost:8080/productos
+
+2. GET - obtener uno
+GET http://localhost:8080/productos/1
+
+3. POST - crear
+POST http://localhost:8080/productos
+Content-Type: application/json
+
+{
+  "id": 3,
+  "nombre": "Monitor"
+}
+
+4. PUT - actualizar
+PUT http://localhost:8080/productos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "Teclado mecánico"
+}
+
+5. DELETE - borrar
+DELETE http://localhost:8080/productos/1
+
+6. PathVariable
+GET http://localhost:8080/productos/1
+
+7. RequestParam
+GET http://localhost:8080/productos/buscar?nombre=teclado
+
+8. RequestParam opcional
+GET http://localhost:8080/productos/buscar
+
+9. RequestParam con valor por defecto
+GET http://localhost:8080/productos/orden
+GET http://localhost:8080/productos/orden?orden=desc
+
+10. Todos los parámetros de query
+GET http://localhost:8080/productos/filtro?nombre=teclado&orden=desc

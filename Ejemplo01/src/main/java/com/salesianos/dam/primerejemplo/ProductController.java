@@ -8,15 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/product")
 public class ProductController {
+    private final ProductoRepository productoRepository;
 
-        @PostMapping
-    public Product addProduct(@RequestBody Product product) {
-        return ResponseEntity.status(201).body(productRepository)
-    }
-
-    record Product(String name, String price) {
-    }
-
-    @GetMapping
-    pub
+    @PostMapping
+    public Product addProduct
 }
