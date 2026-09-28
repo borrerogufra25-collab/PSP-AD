@@ -11,6 +11,11 @@ public class ProductRepository {
 
     private List<Product> products;
 
+    public Product addProduct(Product product){
+        products.add(product);
+        return product;
+    }
+
     public ProductRepository() {
         this.products = new ArrayList<>();
     }

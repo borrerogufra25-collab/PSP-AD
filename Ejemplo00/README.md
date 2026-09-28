@@ -1,175 +1,123 @@
-# UD1 - Desarrollo de una API REST con Spring Boot
+# UD1 REST - Spring Boot + Lombok + JPA + H2
 
-Proyecto didáctico basado EXCLUSIVAMENTE en los contenidos prácticos de la presentación UD1.
+Proyecto de ejemplo para practicar los conceptos de REST de la UD1:
 
-## Contenidos incluidos
+- GET, POST, PUT y DELETE
+- `@RestController`
+- `@RequestMapping`
+- `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`
+- `@PathVariable`
+- `@RequestParam`
+- `@RequestBody`
+- `ResponseEntity`
+- JSON
+- Inyección de dependencias
+- Lombok
+- JPA
+- H2
 
-- HTTP: GET, POST, PUT y DELETE.
-- Códigos HTTP: 200, 201, 204, 400 y 404.
-- JSON.
-- `@RestController`.
-- `@RequestMapping`.
-- `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`.
-- `@RequestBody`.
-- `@PathVariable`.
-- `@RequestParam`.
-- `ResponseEntity<?>`.
-- `@Service`, `@Repository`, `@Component` y `@Controller` como estereotipos.
-- Inyección de dependencias mediante constructor.
-- Conversión automática Java <-> JSON mediante el mecanismo de `HttpMessageConverter`.
+## Tecnologías
 
-## Lo que NO se incluye
+- Java 17
+- Spring Boot 3.5.6
+- Spring Web
+- Spring Data JPA
+- Lombok
+- H2
 
-Para respetar el alcance de la presentación, este proyecto NO introduce:
-- JPA/Hibernate.
-- Bases de datos.
-- DTO.
-- Lombok.
-- Seguridad/JWT.
-- Validación.
-- Excepciones personalizadas.
-- Swagger/OpenAPI.
-- HATEOAS.
-- PATCH.
-- Microservicios.
-
-## Ejecutar
-
-Desde la carpeta del proyecto:
-
-```bash
-mvn spring-boot:run
-```
-
-Servidor por defecto:
+## Estructura
 
 ```text
-http://localhost:8080
+src/main/java/com/ejemplo/ud1rest/
+├── Ud1RestApplication.java
+├── controller/
+│   └── ProductoController.java
+├── model/
+│   └── Producto.java
+├── repository/
+│   └── ProductoRepository.java
+└── service/
+    └── ProductoService.java
 ```
 
-También se puede ejecutar la clase `Ud1RestApplication` desde Eclipse/STS/IntelliJ.
+## Qué hace cada capa
 
-## Ejemplos para probar
+### Controller
+Recibe las peticiones HTTP y devuelve las respuestas REST.
 
-### 1. Primer endpoint
+### Service
+Contiene la lógica que queremos separar del controlador.
 
-GET
+### Repository
+Se encarga de comunicarse con la base de datos mediante JPA.
 
-```text
-http://localhost:8080/hello
-```
+### Entity
+`Producto` representa una tabla de la base de datos.
 
-Respuesta:
+## H2
 
-```text
-Hello World
-```
+La aplicación utiliza H2 como base de datos en memoria.
 
-### 2. Obtener un producto
+Configuración en:
 
-GET
+`src/main/resources/application.properties`
 
-```text
-http://localhost:8080/productos/1
-```
+La consola H2 queda disponible en:
 
-Respuesta:
+`http://localhost:8080/h2-console`
+
+Datos de conexión:
+
+- JDBC URL: `jdbc:h2:mem:productosdb`
+- User Name: `sa`
+- Password: vacío
+
+## Ejemplos para Postman
+
+### Obtener todos
+
+GET `http://localhost:8080/productos`
+
+### Obtener uno
+
+GET `http://localhost:8080/productos/1`
+
+### Buscar por nombre
+
+GET `http://localhost:8080/productos/buscar?nombre=teclado`
+
+### Crear
+
+POST `http://localhost:8080/productos`
+
+Body -> raw -> JSON:
 
 ```json
 {
-  "id": 1,
-  "nombre": "Teclado"
+  "nombre": "Teclado",
+  "precio": 35.99
 }
 ```
 
-### 3. Crear un producto
+### Modificar
 
-POST
-
-```text
-http://localhost:8080/productos
-```
-
-Body JSON:
-
-```json
-{
-  "id": 3,
-  "nombre": "Monitor"
-}
-```
-
-La aplicación recibe ese JSON mediante `@RequestBody`.
-
-### 4. Obtener todos los productos
-
-GET
-
-```text
-http://localhost:8080/productos
-```
-
-### 5. Actualizar
-
-PUT
-
-```text
-http://localhost:8080/productos/1
-```
+PUT `http://localhost:8080/productos/1`
 
 Body:
 
 ```json
 {
-  "id": 1,
-  "nombre": "Teclado mecánico"
+  "nombre": "Teclado mecánico",
+  "precio": 49.99
 }
 ```
 
-### 6. Borrar
+### Eliminar
 
-DELETE
-
-```text
-http://localhost:8080/productos/1
-```
-
-### 7. PathVariable
-
-GET
-
-```text
-http://localhost:8080/productos/1
-```
-
-El `1` forma parte de la ruta y se recibe con `@PathVariable`.
-
-### 8. RequestParam
-
-GET
-
-```text
-http://localhost:8080/productos/buscar?nombre=teclado
-```
-
-También puedes probar:
-
-```text
-http://localhost:8080/productos/buscar
-```
-
-El parámetro es opcional porque se ha configurado `required=false`.
-
-### 9. Varios parámetros de query
-
-GET
-
-```text
-http://localhost:8080/productos/filtro?nombre=teclado&orden=desc
-```
-
-Los parámetros de la query se reciben con `@RequestParam`.
+DELETE `http://localhost:8080/productos/1`
 
 ## Importante
 
-Los datos de los productos se guardan solamente en memoria mientras la aplicación está funcionando. Al reiniciar la aplicación, vuelven a los datos iniciales.
+H2 es una base de datos en memoria. Al detener la aplicación, los datos se pierden.
+
+Este proyecto añade Lombok, JPA y H2 porque se han solicitado expresamente. No añade seguridad, JWT, DTO, Swagger/OpenAPI, HATEOAS ni PATCH.

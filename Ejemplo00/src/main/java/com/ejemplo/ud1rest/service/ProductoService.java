@@ -1,49 +1,70 @@
 package com.ejemplo.ud1rest.service;
 
-import com.ejemplo.ud1rest.model.Producto;
-import com.ejemplo.ud1rest.repository.ProductoRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.ejemplo.ud1rest.model.Producto;
+import com.ejemplo.ud1rest.repository.ProductoRepository;
 
 /*
- * @Service es otro estereotipo mostrado en la presentación.
- *
- * Esta clase contiene la lógica que utiliza el controlador.
- *
- * Observa que NO hacemos:
- *
- *     new ProductoRepository()
- *
- * La dependencia se recibe desde fuera mediante el constructor.
- * Esto es inyección de dependencias.
+ * @Service indica que esta clase contiene lógica de la aplicación.
  */
 @Service
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
 
+    /*
+     * Inyección de dependencias mediante constructor.
+     *
+     * Spring crea ProductoRepository y se lo proporciona
+     * automáticamente al crear ProductoService.
+     */
     public ProductoService(ProductoRepository productoRepository) {
         this.productoRepository = productoRepository;
     }
 
     public List<Producto> obtenerTodos() {
-        return productoRepository.obtenerTodos();
+        return productoRepository.findAll();
     }
 
-    public Producto obtenerPorId(Long id) {
-        return productoRepository.obtenerPorId(id);
+    public Optional<Producto> obtenerPorId(Long id) {
+        return productoRepository.findById(id);
     }
 
     public Producto guardar(Producto producto) {
-        return productoRepository.guardar(producto);
+        return productoRepository.save(producto);
     }
 
-    public Producto actualizar(Long id, Producto producto) {
-        return productoRepository.actualizar(id, producto);
+    public Optional<Producto> actualizar(Long id, Producto datos) {
+
+        Optional<Producto> resultado = productoRepository.findById(id);
+
+        if (resultado.isPresent()) {
+            Producto producto = resultado.get();
+
+            producto.setNombre(datos.getNombre());
+            producto.setPrecio(datos.getPrecio());
+
+            return Optional.of(productoRepository.save(producto));
+        }
+
+        return Optional.empty();
     }
 
-    public boolean borrar(Long id) {
-        return productoRepository.borrar(id);
+    public boolean eliminar(Long id) {
+
+        if (productoRepository.existsById(id)) {
+            productoRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<Producto> buscarPorNombre(String nombre) {
+        return productoRepository.findByNombreContainingIgnoreCase(nombre);
     }
 }

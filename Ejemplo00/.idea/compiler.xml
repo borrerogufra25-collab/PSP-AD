@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ud1-rest" />
+        <module name="ud1-rest-lombok-jpa-h2" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ud1-rest" options="-parameters" />
+      <module name="ud1-rest-lombok-jpa-h2" options="-parameters" />
     </option>
   </component>
 </project>

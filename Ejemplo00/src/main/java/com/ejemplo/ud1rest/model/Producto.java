@@ -1,46 +1,62 @@
 package com.ejemplo.ud1rest.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /*
- * Esta clase representa el recurso Producto.
- *
- * La presentación muestra que un recurso REST puede tener
- * una representación en JSON.
- *
- * Ejemplo de JSON:
- *
- * {
- *   "id": 1,
- *   "nombre": "Teclado"
- * }
+ * @Entity indica que esta clase es una entidad JPA.
+ * JPA utilizará esta clase para representar una tabla de la base de datos.
  */
+@Entity
+
+/*
+ * @Table permite indicar el nombre de la tabla.
+ */
+@Table(name = "productos")
+
+/*
+ * Lombok genera automáticamente los getters.
+ */
+@Getter
+
+/*
+ * Lombok genera automáticamente los setters.
+ */
+@Setter
+
+/*
+ * Genera un constructor vacío.
+ * JPA necesita un constructor sin argumentos.
+ */
+@NoArgsConstructor
+
+/*
+ * Genera un constructor con todos los atributos.
+ */
+@AllArgsConstructor
+
 public class Producto {
 
+    /*
+     * @Id indica que este atributo es la clave primaria.
+     */
+    @Id
+
+    /*
+     * H2/JPA generará automáticamente el valor del ID.
+     */
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
 
-    // Constructor vacío.
-    // Spring/Jackson puede necesitarlo para convertir JSON a Java.
-    public Producto() {
-    }
-
-    public Producto(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    private Double precio;
 }
