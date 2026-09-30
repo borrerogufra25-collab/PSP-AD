@@ -27,11 +27,7 @@ public class ProductController {
 
         if (StringUtils.hasText(product.name())) {
             return ResponseEntity.status(201)
-                    .body(
-                            GetProductDetail.of(
-                                    productRepository.save(product.to())
-                            )
-                    );
+                .body(GetProductDetail.of(productRepository.save(product.to())));
         }
 
         return ResponseEntity.badRequest().build();
@@ -48,10 +44,10 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(
-                result
-                        .stream()
-                        .map(GetProductList::of)
-                        .toList());
+            result
+                .stream()
+                .map(GetProductList::of)
+                .toList());
     }
 
     @GetMapping("/{id}")
@@ -59,23 +55,23 @@ public class ProductController {
     public ResponseEntity<GetProductDetail> getProductById(@PathVariable Long id) {
 
         return ResponseEntity.of(
-                productRepository.findById(id)
-                        .map(GetProductDetail::of)
+            productRepository.findById(id)
+                .map(GetProductDetail::of)
         );
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(
-            @PathVariable Long id,
-            @RequestBody Product product) {
+        @PathVariable Long id,
+        @RequestBody Product product) {
 
         return productRepository.findById(id)
-                .map(p -> {
-                    p.setName(product.getName());
-                    p.setPrice(product.getPrice());
-                    return ResponseEntity.ok(productRepository.save(p));
-                })
-                .orElse(ResponseEntity.notFound().build());
+            .map(p -> {
+                p.setName(product.getName());
+                p.setPrice(product.getPrice());
+                return ResponseEntity.ok(productRepository.save(p));
+            })
+            .orElse(ResponseEntity.notFound().build());
 
     }
 
