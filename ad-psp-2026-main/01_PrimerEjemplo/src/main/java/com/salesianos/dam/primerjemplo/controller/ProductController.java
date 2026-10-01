@@ -27,7 +27,11 @@ public class ProductController {
 
         if (StringUtils.hasText(product.name())) {
             return ResponseEntity.status(201)
-                    .body(GetProductDetail.of(productRepository.save(product.to())));
+                    .body(
+                            GetProductDetail.of(
+                                    productRepository.save(product.to())
+                            )
+                    );
         }
 
         return ResponseEntity.badRequest().build();
@@ -65,13 +69,19 @@ public class ProductController {
             @PathVariable Long id,
             @RequestBody EditProductDto product) {
 
+
+        if (!StringUtils.hasText(product.name()) || product.price() < 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
         return productRepository.findById(id)
                 .map(p -> {
                     p.setName(product.name());
                     p.setPrice(product.price());
                     p.setDetails(product.details());
                     return ResponseEntity.ok(
-                            GetProductDetail.of(productRepository.save(p)));
+                            GetProductDetail.of(productRepository.save(p))
+                    );
                 }).orElse(ResponseEntity.notFound().build());
 
 
