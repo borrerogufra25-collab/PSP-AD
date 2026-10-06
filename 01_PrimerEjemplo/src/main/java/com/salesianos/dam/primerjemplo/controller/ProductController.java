@@ -3,17 +3,14 @@ package com.salesianos.dam.primerjemplo.controller;
 import com.salesianos.dam.primerjemplo.dto.EditProductDto;
 import com.salesianos.dam.primerjemplo.dto.GetProductDetail;
 import com.salesianos.dam.primerjemplo.dto.GetProductList;
-import com.salesianos.dam.primerjemplo.error.ProductNotFoundException;
 import com.salesianos.dam.primerjemplo.model.Product;
 import com.salesianos.dam.primerjemplo.repo.ProductRepository;
 import com.salesianos.dam.primerjemplo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -27,8 +24,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<GetProductDetail> addProduct(@RequestBody EditProductDto product) {
 
-        return ResponseEntity.status(201)
-                .body(GetProductDetail.of(productService.addProduct(product)));
+        return ResponseEntity.status(201).body(GetProductDetail.of(productService.addProduct(product)));
 
     }
 
@@ -36,11 +32,7 @@ public class ProductController {
     public ResponseEntity<List<GetProductList>> getAllProducts() {
 
         List<Product> result = productService.getAllProducts();
-        return ResponseEntity.ok(
-                result
-                        .stream()
-                        .map(GetProductList::of)
-                        .toList());
+        return ResponseEntity.ok(result.stream().map(GetProductList::of).toList());
     }
 
     @GetMapping("/{id}")
@@ -51,12 +43,9 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GetProductDetail> updateProduct(
-            @PathVariable Long id,
-            @RequestBody EditProductDto product) {
+    public ResponseEntity<GetProductDetail> updateProduct(@PathVariable Long id, @RequestBody EditProductDto product) {
 
-        return ResponseEntity.ok(
-                GetProductDetail.of(productService.updateProduct(id, product)));
+        return ResponseEntity.ok(GetProductDetail.of(productService.updateProduct(id, product)));
 
 
     }
