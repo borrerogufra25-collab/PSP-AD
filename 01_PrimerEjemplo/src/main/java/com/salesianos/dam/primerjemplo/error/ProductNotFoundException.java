@@ -6,7 +6,7 @@ public class ProductNotFoundException extends RuntimeException {
         super("Products not found");
     }
 
-    public  ProductNotFoundException(Long id) {
+    public ProductNotFoundException(Long id) {
         super("Product not found with id " + id);
     }
 

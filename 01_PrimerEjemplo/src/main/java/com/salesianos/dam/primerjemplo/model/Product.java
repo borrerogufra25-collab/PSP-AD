@@ -20,7 +20,8 @@ import java.time.LocalDateTime;
 @Builder
 public class Product {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private Double price;
@@ -43,7 +44,6 @@ public class Product {
         OneToOne: Product -> ProductInfo
 
      */
-
 
 
 }

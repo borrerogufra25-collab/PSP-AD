@@ -1,5 +1,6 @@
 package com.salesianos.dam.primerjemplo.utils;
 
+import com.salesianos.dam.primerjemplo.model.Category;
 import com.salesianos.dam.primerjemplo.service.CategoryService;
 import com.salesianos.dam.primerjemplo.service.ProductService;
 import jakarta.annotation.PostConstruct;
@@ -15,12 +16,8 @@ public class DataSeed {
 
     @PostConstruct
     public void initData() {
-
-        /*
-            Invocar a los servicios para insertar
-            datos de ejemplo
-         */
-
+        categoryService.addCategory(Category.builder().name("Panadería").build());
+        categoryService.addCategory(Category.builder().name("Bebidas").build());
     }
 
 }

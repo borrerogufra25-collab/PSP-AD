@@ -59,3 +59,34 @@ Content-Type: application/json
 
 ### DELETE borrar producto id 1
 DELETE http://localhost:8080/api/product/1
+
+### CATEGORÍAS
+
+### Obtener todas las categorías
+GET http://localhost:8080/api/category
+
+
+### Obtener categoría por ID
+GET http://localhost:8080/api/category/1
+
+
+### Crear categoría
+POST http://localhost:8080/api/category
+Content-Type: application/json
+
+{
+  "name": "Panadería"
+}
+
+
+### Modificar categoría
+PUT http://localhost:8080/api/category/1
+Content-Type: application/json
+
+{
+  "name": "Alimentación"
+}
+
+
+### Eliminar categoría
+DELETE http://localhost:8080/api/category/1
