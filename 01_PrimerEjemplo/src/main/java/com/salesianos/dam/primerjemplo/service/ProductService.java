@@ -1,13 +1,16 @@
 package com.salesianos.dam.primerjemplo.service;
 
 import com.salesianos.dam.primerjemplo.dto.EditProductDto;
+import com.salesianos.dam.primerjemplo.dto.GetProductDetail;
 import com.salesianos.dam.primerjemplo.error.InvalidProductException;
 import com.salesianos.dam.primerjemplo.error.ProductNotFoundException;
 import com.salesianos.dam.primerjemplo.model.Product;
 import com.salesianos.dam.primerjemplo.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -33,7 +36,8 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     public Product addProduct(EditProductDto editProductDto) {
@@ -43,13 +47,15 @@ public class ProductService {
 
     public Product updateProduct(Long id, EditProductDto editProductDto) {
 
-        return productRepository.findById(id).map(p -> {
-            validateProduct(editProductDto);
-            p.setName(editProductDto.name());
-            p.setPrice(editProductDto.price());
-            p.setDetails(editProductDto.details());
-            return productRepository.save(p);
-        }).orElseThrow(() -> new ProductNotFoundException(id));
+        return productRepository.findById(id)
+                .map(p -> {
+                            validateProduct(editProductDto);
+                            p.setName(editProductDto.name());
+                            p.setPrice(editProductDto.price());
+                            p.setDetails(editProductDto.details());
+                            return productRepository.save(p);
+                        })
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
 
@@ -67,13 +73,16 @@ public class ProductService {
 
 
     private void validateProduct(EditProductDto editProductDto) {
-        if (!StringUtils.hasText(editProductDto.name()) || !StringUtils.hasText(editProductDto.details())) {
+        if (!StringUtils.hasText(editProductDto.name())
+                || !StringUtils.hasText(editProductDto.details())) {
             throw new InvalidProductException("Product name and details are required");
         }
         if (editProductDto.price() < 0) {
             throw new InvalidProductException("Price is required");
         }
     }
+
+
 
 
 }
