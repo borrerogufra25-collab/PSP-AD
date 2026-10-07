@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Category {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    private String name;
+  private String name;
 }

@@ -6,10 +6,11 @@ public record GetCategoryDetail(
     Long id,
     String name
 ) {
-    public static GetCategoryDetail of(Category c) {
-        return new GetCategoryDetail(
-            c.getId(),
-            c.getName()
-        );
-    }
+
+  public static GetCategoryDetail of(Category c) {
+    return new GetCategoryDetail(
+        c.getId(),
+        c.getName()
+    );
+  }
 }

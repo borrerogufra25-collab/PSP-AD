@@ -18,50 +18,50 @@ import java.util.List;
 @RequestMapping("/api/product")
 public class ProductController {
 
-    private final ProductRepository productRepository;
-    private final ProductService productService;
+  private final ProductRepository productRepository;
+  private final ProductService productService;
 
-    @PostMapping
-    public ResponseEntity<GetProductDetail> addProduct(@RequestBody EditProductDto product) {
+  @PostMapping
+  public ResponseEntity<GetProductDetail> addProduct(@RequestBody EditProductDto product) {
 
-        return ResponseEntity.status(201)
-            .body(GetProductDetail.of(productService.addProduct(product)));
+    return ResponseEntity.status(201)
+        .body(GetProductDetail.of(productService.addProduct(product)));
 
-    }
+  }
 
-    @GetMapping
-    public ResponseEntity<List<GetProductList>> getAllProducts() {
+  @GetMapping
+  public ResponseEntity<List<GetProductList>> getAllProducts() {
 
-        List<Product> result = productService.getAllProducts();
-        return ResponseEntity.ok(
-            result
-                .stream()
-                .map(GetProductList::of)
-                .toList());
-    }
+    List<Product> result = productService.getAllProducts();
+    return ResponseEntity.ok(
+        result
+            .stream()
+            .map(GetProductList::of)
+            .toList());
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GetProductDetail> getProductById(@PathVariable Long id) {
+  @GetMapping("/{id}")
+  public ResponseEntity<GetProductDetail> getProductById(@PathVariable Long id) {
 
-        return ResponseEntity.ok(GetProductDetail.of(productService.getProductById(id)));
+    return ResponseEntity.ok(GetProductDetail.of(productService.getProductById(id)));
 
-    }
+  }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<GetProductDetail> updateProduct(
-        @PathVariable Long id,
-        @RequestBody EditProductDto product) {
+  @PutMapping("/{id}")
+  public ResponseEntity<GetProductDetail> updateProduct(
+      @PathVariable Long id,
+      @RequestBody EditProductDto product) {
 
-        return ResponseEntity.ok(
-            GetProductDetail.of(productService.updateProduct(id, product)));
+    return ResponseEntity.ok(
+        GetProductDetail.of(productService.updateProduct(id, product)));
 
 
-    }
+  }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
-    }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    productService.deleteProduct(id);
+    return ResponseEntity.noContent().build();
+  }
 
 }

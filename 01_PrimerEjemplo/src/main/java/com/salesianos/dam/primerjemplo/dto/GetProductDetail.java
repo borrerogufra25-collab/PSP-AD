@@ -9,13 +9,13 @@ public record GetProductDetail(
     String details
 ) {
 
-    public static GetProductDetail of(Product p) {
-        return new GetProductDetail(
-            p.getId(),
-            p.getName(),
-            p.getPrice(),
-            p.getDetails()
-        );
-    }
+  public static GetProductDetail of(Product p) {
+    return new GetProductDetail(
+        p.getId(),
+        p.getName(),
+        p.getPrice(),
+        p.getDetails()
+    );
+  }
 
 }

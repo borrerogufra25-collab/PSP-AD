@@ -8,12 +8,12 @@ public record EditProductDto(
     String details
 ) {
 
-    public Product to() {
-        return Product.builder()
-            .name(name)
-            .price(price)
-            .details(details)
-            .build();
-    }
+  public Product to() {
+    return Product.builder()
+        .name(name)
+        .price(price)
+        .details(details)
+        .build();
+  }
 
 }

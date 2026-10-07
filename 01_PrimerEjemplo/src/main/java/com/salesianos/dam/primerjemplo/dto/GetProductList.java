@@ -8,9 +8,9 @@ public record GetProductList(
     Double price
 ) {
 
-    public static GetProductList of(Product p) {
-        return new GetProductList(p.getId(), p.getName(), p.getPrice());
-    }
+  public static GetProductList of(Product p) {
+    return new GetProductList(p.getId(), p.getName(), p.getPrice());
+  }
 
 
 }
