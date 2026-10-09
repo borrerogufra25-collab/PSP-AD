@@ -1,11 +1,13 @@
 package com.salesianos.dam.primerjemplo.dto;
 
+
 import com.salesianos.dam.primerjemplo.model.Product;
 
 public record EditProductDto(
     String name,
     Double price,
-    String details
+    String details,
+    String categoryName
 ) {
 
   public Product to() {
@@ -13,6 +15,7 @@ public record EditProductDto(
         .name(name)
         .price(price)
         .details(details)
+        .category().name(categoryName)
         .build();
   }
 

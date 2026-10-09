@@ -6,15 +6,18 @@ public record GetProductDetail(
     Long id,
     String name,
     Double price,
-    String details
+    String details,
+    String categoryName
 ) {
 
   public static GetProductDetail of(Product p) {
+    String categoryName = String.valueOf(p.getCategory());
     return new GetProductDetail(
         p.getId(),
         p.getName(),
         p.getPrice(),
-        p.getDetails()
+        p.getDetails(),
+        categoryName
     );
   }
 

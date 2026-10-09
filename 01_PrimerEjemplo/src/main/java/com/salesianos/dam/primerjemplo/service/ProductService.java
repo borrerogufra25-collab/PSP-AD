@@ -2,13 +2,14 @@ package com.salesianos.dam.primerjemplo.service;
 
 import com.salesianos.dam.primerjemplo.dto.EditProductDto;
 import com.salesianos.dam.primerjemplo.error.InvalidProductException;
-import com.salesianos.dam.primerjemplo.error.ProductNotFoundException;
+import com.salesianos.dam.primerjemplo.error.notfound.ProductNotFoundException;
 import com.salesianos.dam.primerjemplo.model.Product;
 import com.salesianos.dam.primerjemplo.repo.ProductRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +33,8 @@ public class ProductService {
   }
 
   public Product getProductById(Long id) {
-    return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+    return productRepository.findById(id)
+        .orElseThrow(() -> new ProductNotFoundException(id));
   }
 
   public Product addProduct(EditProductDto editProductDto) {
@@ -42,13 +44,15 @@ public class ProductService {
 
   public Product updateProduct(Long id, EditProductDto editProductDto) {
 
-    return productRepository.findById(id).map(p -> {
-      validateProduct(editProductDto);
-      p.setName(editProductDto.name());
-      p.setPrice(editProductDto.price());
-      p.setDetails(editProductDto.details());
-      return productRepository.save(p);
-    }).orElseThrow(() -> new ProductNotFoundException(id));
+    return productRepository.findById(id)
+        .map(p -> {
+          validateProduct(editProductDto);
+          p.setName(editProductDto.name());
+          p.setPrice(editProductDto.price());
+          p.setDetails(editProductDto.details());
+          return productRepository.save(p);
+        })
+        .orElseThrow(() -> new ProductNotFoundException(id));
   }
 
 
@@ -66,8 +70,8 @@ public class ProductService {
 
 
   private void validateProduct(EditProductDto editProductDto) {
-    if (!StringUtils.hasText(editProductDto.name()) || !StringUtils.hasText(
-        editProductDto.details())) {
+    if (!StringUtils.hasText(editProductDto.name())
+        || !StringUtils.hasText(editProductDto.details())) {
       throw new InvalidProductException("Product name and details are required");
     }
     if (editProductDto.price() < 0) {

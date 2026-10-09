@@ -5,13 +5,19 @@ import com.salesianos.dam.primerjemplo.model.Product;
 public record GetProductList(
     Long id,
     String name,
-    Double price
+    Double price,
+    String categoryName
 ) {
 
   public static GetProductList of(Product p) {
-    return new GetProductList(p.getId(), p.getName(), p.getPrice());
+    String categoryName = String.valueOf(p.getCategory());
+    return new GetProductList(
+        p.getId(),
+        p.getName(),
+        p.getPrice(),
+        categoryName
+    );
   }
 
 
 }
-
