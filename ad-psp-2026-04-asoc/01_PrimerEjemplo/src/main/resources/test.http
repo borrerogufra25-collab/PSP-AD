@@ -1,0 +1,66 @@
+
+### POST Crear producto
+POST http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+  "name": "Pan y picos",
+  "price": 1,
+  "details": "Servicio de mesa"
+}
+
+### POST Crear producto - Error 1
+POST http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": 1,
+  "details": "Servicio de mesa"
+}
+
+### POST Crear producto - Error 2
+POST http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+  "name": "Pan y picos",
+  "price": -1,
+  "details": "Servicio de mesa"
+}
+
+
+### POST Crear producto - Error 3
+POST http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+  "name": "Pan y picos",
+  "price": 1,
+  "details": null
+}
+
+### GET obtener todos los productos
+GET http://localhost:8080/api/product
+
+### GET obtener producto id 1
+GET http://localhost:8080/api/product/111
+
+
+### PUT Modificar producto
+PUT http://localhost:8080/api/product/1
+Content-Type: application/json
+
+{
+  "name": "Pan y picos",
+  "price": -13,
+  "details": "Servicio de mesa por persona"
+}
+
+### DELETE borrar producto id 1
+DELETE http://localhost:8080/api/product/1
+
+
+
+### GET obtener todos las categorías
+GET http://localhost:8080/api/category
