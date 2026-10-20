@@ -1,0 +1,97 @@
+### Peticiones de ejemplo (IntelliJ IDEA / VS Code con la extensión "REST Client").
+### Arranca antes la aplicación y pulsa "Run" sobre cada petición.
+
+### 1. Listar autores
+GET http://localhost:8080/api/autores
+
+### 2. Obtener un autor
+GET http://localhost:8080/api/autores/1
+
+### 3. Libros de un autor
+GET http://localhost:8080/api/autores/2/libros
+
+### 4. Crear un autor (201)
+POST http://localhost:8080/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Isabel Allende",
+  "nacionalidad": "Chilena"
+}
+
+### 5. Crear un autor con datos NO válidos (400: nombre vacío)
+POST http://localhost:8080/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "nacionalidad": "Chilena"
+}
+
+### 6. Modificar un autor
+PUT http://localhost:8080/api/autores/3
+Content-Type: application/json
+
+{
+  "nombre": "Isabel Allende Llona",
+  "nacionalidad": "Chilena"
+}
+
+### 7. Listar libros
+GET http://localhost:8080/api/libros
+
+### 8. Buscar libros por título
+GET http://localhost:8080/api/libros?titulo=cien
+
+### 9. Crear un libro (201)
+POST http://localhost:8080/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "La casa de los espíritus",
+  "isbn": "978-84-9759-259-4",
+  "anioPublicacion": 1982,
+  "precio": 18.90,
+  "autorId": 3
+}
+
+### 10. Crear un libro con ISBN repetido (409)
+POST http://localhost:8080/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Otro libro",
+  "isbn": "978-84-376-0494-7",
+  "anioPublicacion": 2000,
+  "precio": 10.00,
+  "autorId": 1
+}
+
+### 11. Crear un libro con autor inexistente (404)
+POST http://localhost:8080/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Libro huérfano",
+  "isbn": "123-4567890123",
+  "anioPublicacion": 2000,
+  "precio": 10.00,
+  "autorId": 999
+}
+
+### 12. Crear un libro con varios errores de validación (400 con detalles por campo)
+POST http://localhost:8080/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "isbn": "abc",
+  "anioPublicacion": 5,
+  "precio": -3
+}
+
+### 13. Eliminar un libro (204)
+DELETE http://localhost:8080/api/libros/1
+
+### 14. Eliminar un autor que tiene libros (409)
+DELETE http://localhost:8080/api/autores/2

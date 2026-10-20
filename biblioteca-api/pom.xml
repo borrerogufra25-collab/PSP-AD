@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  pom.xml = "descriptor" del proyecto Maven.
+  Aquí se declara: qué versión de Spring Boot usamos, qué librerías (dependencias)
+  necesitamos y cómo se compila el proyecto.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+      Proyecto "padre": Spring Boot nos da la configuración base y, sobre todo,
+      gestiona las VERSIONES de casi todas las librerías. Por eso, en las dependencias
+      de abajo, no ponemos <version> (la decide el padre para que sean compatibles entre sí).
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.1</version>
+        <relativePath/> <!-- Se busca el padre en el repositorio, no en el disco -->
+    </parent>
+
+    <!-- Identificación de NUESTRO proyecto -->
+    <groupId>com.example</groupId>
+    <artifactId>biblioteca-api</artifactId>
+    <version>1.0.0</version>
+    <name>biblioteca-api</name>
+    <description>API REST de ejemplo (Autores y Libros) con Spring Boot</description>
+
+    <properties>
+        <!-- Versión de Java con la que se compila -->
+        <java.version>25</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring MVC + servidor web (Tomcat) + JSON (Jackson): lo necesario para crear una API REST.
+             NOTA: en Spring Boot 4 el antiguo "spring-boot-starter-web" pasó a llamarse "spring-boot-starter-webmvc". -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <!-- Spring Data JPA + Hibernate: acceso a base de datos con objetos Java (entidades) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Bean Validation (jakarta.validation): anotaciones como @NotBlank, @Size, @Min... -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- H2: base de datos en memoria. Perfecta para aprender: no hay que instalar nada.
+             Los datos se pierden al parar la aplicación. -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Consola web de H2 (http://localhost:8080/h2-console).
+             En Spring Boot 4 la consola vive en su propio módulo. Es OPCIONAL:
+             si no la quieres, borra esta dependencia y la propiedad spring.h2.console.* -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-h2console</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Lombok: genera getters, setters, constructores... en tiempo de compilación -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- springdoc-openapi: genera la documentación OpenAPI y la interfaz Swagger UI.
+             La serie 3.x es la que corresponde a Spring Boot 4 (la 2.x es para Spring Boot 3). -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- JUnit 5 + Mockito + AssertJ para los tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+              IMPORTANTE con Java 23+: el compilador ya NO ejecuta automáticamente los
+              "annotation processors" que encuentra en el classpath. Lombok es uno de ellos,
+              así que hay que indicárselo de forma explícita aquí. Si lo quitas, el proyecto
+              no compilará (no existirán getters, setters, etc.).
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin de Spring Boot: permite "mvn spring-boot:run" y generar el .jar ejecutable -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <!-- Lombok solo hace falta al compilar, no se empaqueta en el .jar -->
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
