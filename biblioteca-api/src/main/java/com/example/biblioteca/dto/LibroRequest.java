@@ -23,26 +23,27 @@ import java.math.BigDecimal;
  */
 public record LibroRequest(
 
-        @NotBlank(message = "El título es obligatorio")
-        @Size(max = 200, message = "El título no puede superar los 200 caracteres")
-        String titulo,
+    @NotBlank(message = "El título es obligatorio")
+    @Size(max = 200, message = "El título no puede superar los 200 caracteres")
+    String titulo,
 
-        @NotBlank(message = "El ISBN es obligatorio")
-        // Expresión regular: entre 10 y 17 caracteres, solo dígitos y guiones
-        @Pattern(regexp = "^[0-9-]{10,17}$",
-                 message = "El ISBN debe tener entre 10 y 17 caracteres (solo dígitos y guiones)")
-        String isbn,
+    @NotBlank(message = "El ISBN es obligatorio")
+    // Expresión regular: entre 10 y 17 caracteres, solo dígitos y guiones
+    @Pattern(regexp = "^[0-9-]{10,17}$",
+        message = "El ISBN debe tener entre 10 y 17 caracteres (solo dígitos y guiones)")
+    String isbn,
 
-        @NotNull(message = "El año de publicación es obligatorio")
-        @Min(value = 1000, message = "El año debe ser como mínimo 1000")
-        @Max(value = 2100, message = "El año debe ser como máximo 2100")
-        Integer anioPublicacion,
+    @NotNull(message = "El año de publicación es obligatorio")
+    @Min(value = 1000, message = "El año debe ser como mínimo 1000")
+    @Max(value = 2100, message = "El año debe ser como máximo 2100")
+    Integer anioPublicacion,
 
-        @NotNull(message = "El precio es obligatorio")
-        @DecimalMin(value = "0.0", message = "El precio no puede ser negativo")
-        BigDecimal precio,
+    @NotNull(message = "El precio es obligatorio")
+    @DecimalMin(value = "0.0", message = "El precio no puede ser negativo")
+    BigDecimal precio,
 
-        @NotNull(message = "El id del autor es obligatorio")
-        Long autorId
+    @NotNull(message = "El id del autor es obligatorio")
+    Long autorId
 ) {
+
 }

@@ -21,5 +21,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AutorRepository extends JpaRepository<Autor, Long> {
-    // De momento no necesitamos métodos propios.
+  // De momento no necesitamos métodos propios.
 }

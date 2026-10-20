@@ -14,17 +14,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfig {
 
-    /**
-     * Un método con @Bean le dice a Spring: "crea este objeto y guárdalo en tu contenedor".
-     * springdoc buscará un bean de tipo OpenAPI y lo usará como cabecera de la documentación.
-     */
-    @Bean
-    public OpenAPI bibliotecaOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("API de Biblioteca")
-                        .description("API REST de ejemplo para gestionar autores y libros. "
-                                + "Proyecto didáctico con Spring Boot, JPA, H2 y validaciones.")
-                        .version("1.0.0"));
-    }
+  /**
+   * Un método con @Bean le dice a Spring: "crea este objeto y guárdalo en tu contenedor". springdoc
+   * buscará un bean de tipo OpenAPI y lo usará como cabecera de la documentación.
+   */
+  @Bean
+  public OpenAPI bibliotecaOpenAPI() {
+    return new OpenAPI()
+        .info(new Info()
+            .title("API de Biblioteca")
+            .description("API REST de ejemplo para gestionar autores y libros. "
+                + "Proyecto didáctico con Spring Boot, JPA, H2 y validaciones.")
+            .version("1.0.0"));
+  }
 }

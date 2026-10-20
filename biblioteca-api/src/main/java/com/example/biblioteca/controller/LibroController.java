@@ -38,49 +38,49 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Libros", description = "Operaciones sobre libros")
 public class LibroController {
 
-    private final LibroService libroService;
+  private final LibroService libroService;
 
-    /**
-     * {@code @RequestParam}: lee un parámetro de la query string: GET /api/libros?titulo=quijote
-     * Con required = false, si no se envía el parámetro llega null y se listan todos.
-     */
-    @GetMapping
-    @Operation(summary = "Listar libros", description = "Si se indica 'titulo', filtra los libros cuyo título lo contenga")
-    public List<LibroResponse> listar(@RequestParam(required = false) String titulo) {
-        return libroService.listar(titulo);
-    }
+  /**
+   * {@code @RequestParam}: lee un parámetro de la query string: GET /api/libros?titulo=quijote Con
+   * required = false, si no se envía el parámetro llega null y se listan todos.
+   */
+  @GetMapping
+  @Operation(summary = "Listar libros", description = "Si se indica 'titulo', filtra los libros cuyo título lo contenga")
+  public List<LibroResponse> listar(@RequestParam(required = false) String titulo) {
+    return libroService.listar(titulo);
+  }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Obtener un libro por su id")
-    @ApiResponse(responseCode = "404", description = "El libro no existe")
-    public LibroResponse obtenerPorId(@PathVariable Long id) {
-        return libroService.obtenerPorId(id);
-    }
+  @GetMapping("/{id}")
+  @Operation(summary = "Obtener un libro por su id")
+  @ApiResponse(responseCode = "404", description = "El libro no existe")
+  public LibroResponse obtenerPorId(@PathVariable Long id) {
+    return libroService.obtenerPorId(id);
+  }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Crear un libro")
-    @ApiResponse(responseCode = "400", description = "Datos no válidos")
-    @ApiResponse(responseCode = "404", description = "El autor indicado no existe")
-    @ApiResponse(responseCode = "409", description = "Ya existe un libro con ese ISBN")
-    public LibroResponse crear(@Valid @RequestBody LibroRequest request) {
-        return libroService.crear(request);
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Crear un libro")
+  @ApiResponse(responseCode = "400", description = "Datos no válidos")
+  @ApiResponse(responseCode = "404", description = "El autor indicado no existe")
+  @ApiResponse(responseCode = "409", description = "Ya existe un libro con ese ISBN")
+  public LibroResponse crear(@Valid @RequestBody LibroRequest request) {
+    return libroService.crear(request);
+  }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Modificar un libro")
-    @ApiResponse(responseCode = "400", description = "Datos no válidos")
-    @ApiResponse(responseCode = "404", description = "El libro o el autor no existen")
-    @ApiResponse(responseCode = "409", description = "Ya existe otro libro con ese ISBN")
-    public LibroResponse actualizar(@PathVariable Long id, @Valid @RequestBody LibroRequest request) {
-        return libroService.actualizar(id, request);
-    }
+  @PutMapping("/{id}")
+  @Operation(summary = "Modificar un libro")
+  @ApiResponse(responseCode = "400", description = "Datos no válidos")
+  @ApiResponse(responseCode = "404", description = "El libro o el autor no existen")
+  @ApiResponse(responseCode = "409", description = "Ya existe otro libro con ese ISBN")
+  public LibroResponse actualizar(@PathVariable Long id, @Valid @RequestBody LibroRequest request) {
+    return libroService.actualizar(id, request);
+  }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Eliminar un libro")
-    @ApiResponse(responseCode = "404", description = "El libro no existe")
-    public void eliminar(@PathVariable Long id) {
-        libroService.eliminar(id);
-    }
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(summary = "Eliminar un libro")
+  @ApiResponse(responseCode = "404", description = "El libro no existe")
+  public void eliminar(@PathVariable Long id) {
+    libroService.eliminar(id);
+  }
 }

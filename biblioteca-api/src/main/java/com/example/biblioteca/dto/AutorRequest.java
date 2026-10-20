@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO (Data Transfer Object) de ENTRADA: los datos que el cliente envía para crear
- * o modificar un autor.
+ * DTO (Data Transfer Object) de ENTRADA: los datos que el cliente envía para crear o modificar un
+ * autor.
  *
  * <p>¿Por qué un DTO y no usar directamente la entidad Autor?
  * <ul>
@@ -23,11 +23,12 @@ import jakarta.validation.constraints.Size;
  */
 public record AutorRequest(
 
-        @NotBlank(message = "El nombre es obligatorio")   // no null, no vacío, no solo espacios
-        @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
-        String nombre,
+    @NotBlank(message = "El nombre es obligatorio")   // no null, no vacío, no solo espacios
+    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
+    String nombre,
 
-        @Size(max = 50, message = "La nacionalidad no puede superar los 50 caracteres")
-        String nacionalidad   // opcional: sin @NotBlank puede venir null
+    @Size(max = 50, message = "La nacionalidad no puede superar los 50 caracteres")
+    String nacionalidad   // opcional: sin @NotBlank puede venir null
 ) {
+
 }

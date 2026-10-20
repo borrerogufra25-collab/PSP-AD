@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
- * Formato único para TODOS los errores de la API. Así el cliente siempre recibe
- * la misma estructura JSON, por ejemplo:
+ * Formato único para TODOS los errores de la API. Así el cliente siempre recibe la misma estructura
+ * JSON, por ejemplo:
  *
  * <pre>
  * {
@@ -24,10 +24,11 @@ import java.util.Map;
  * @param detalles  errores por campo (solo en validaciones; si no hay, será un mapa vacío)
  */
 public record ErrorResponse(
-        LocalDateTime timestamp,
-        int status,
-        String error,
-        String mensaje,
-        Map<String, String> detalles
+    LocalDateTime timestamp,
+    int status,
+    String error,
+    String mensaje,
+    Map<String, String> detalles
 ) {
+
 }

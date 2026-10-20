@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador REST de Autores: recibe las peticiones HTTP, llama al servicio y
- * devuelve la respuesta en JSON. No contiene lógica de negocio.
+ * Controlador REST de Autores: recibe las peticiones HTTP, llama al servicio y devuelve la
+ * respuesta en JSON. No contiene lógica de negocio.
  *
  * <ul>
  *   <li>{@code @RestController}: es un controlador cuyas respuestas se escriben directamente
@@ -49,60 +49,62 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Autores", description = "Operaciones sobre autores")
 public class AutorController {
 
-    private final AutorService autorService;
+  private final AutorService autorService;
 
-    @GetMapping
-    @Operation(summary = "Listar todos los autores")
-    public List<AutorResponse> listar() {
-        return autorService.listar();
-    }
+  @GetMapping
+  @Operation(summary = "Listar todos los autores")
+  public List<AutorResponse> listar() {
+    return autorService.listar();
+  }
 
-    /**
-     * {@code @PathVariable} toma el valor de {id} de la URL: GET /api/autores/3 -> id = 3.
-     */
-    @GetMapping("/{id}")
-    @Operation(summary = "Obtener un autor por su id")
-    @ApiResponse(responseCode = "404", description = "El autor no existe")
-    public AutorResponse obtenerPorId(@PathVariable Long id) {
-        return autorService.obtenerPorId(id);
-    }
+  /**
+   * {@code @PathVariable} toma el valor de {id} de la URL: GET /api/autores/3 -> id = 3.
+   */
+  @GetMapping("/{id}")
+  @Operation(summary = "Obtener un autor por su id")
+  @ApiResponse(responseCode = "404", description = "El autor no existe")
+  public AutorResponse obtenerPorId(@PathVariable Long id) {
+    return autorService.obtenerPorId(id);
+  }
 
-    @GetMapping("/{id}/libros")
-    @Operation(summary = "Listar los libros de un autor")
-    @ApiResponse(responseCode = "404", description = "El autor no existe")
-    public List<LibroResponse> listarLibros(@PathVariable Long id) {
-        return autorService.listarLibros(id);
-    }
+  @GetMapping("/{id}/libros")
+  @Operation(summary = "Listar los libros de un autor")
+  @ApiResponse(responseCode = "404", description = "El autor no existe")
+  public List<LibroResponse> listarLibros(@PathVariable Long id) {
+    return autorService.listarLibros(id);
+  }
 
-    /**
-     * {@code @RequestBody}: convierte el JSON del cuerpo de la petición en un AutorRequest.
-     * {@code @Valid}: ejecuta las validaciones (@NotBlank, @Size...) del DTO antes de entrar
-     * al método. Si fallan, el método NO se ejecuta y se devuelve un 400.
-     * {@code @ResponseStatus(CREATED)}: responde 201 en lugar del 200 por defecto.
-     */
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Crear un autor")
-    @ApiResponse(responseCode = "400", description = "Datos no válidos")
-    public AutorResponse crear(@Valid @RequestBody AutorRequest request) {
-        return autorService.crear(request);
-    }
+  /**
+   * {@code @RequestBody}: convierte el JSON del cuerpo de la petición en un AutorRequest.
+   * {@code @Valid}: ejecuta las validaciones (@NotBlank, @Size...) del DTO antes de entrar al
+   * método. Si fallan, el método NO se ejecuta y se devuelve un 400.
+   * {@code @ResponseStatus(CREATED)}: responde 201 en lugar del 200 por defecto.
+   */
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Crear un autor")
+  @ApiResponse(responseCode = "400", description = "Datos no válidos")
+  public AutorResponse crear(@Valid @RequestBody AutorRequest request) {
+    return autorService.crear(request);
+  }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Modificar un autor")
-    @ApiResponse(responseCode = "400", description = "Datos no válidos")
-    @ApiResponse(responseCode = "404", description = "El autor no existe")
-    public AutorResponse actualizar(@PathVariable Long id, @Valid @RequestBody AutorRequest request) {
-        return autorService.actualizar(id, request);
-    }
+  @PutMapping("/{id}")
+  @Operation(summary = "Modificar un autor")
+  @ApiResponse(responseCode = "400", description = "Datos no válidos")
+  @ApiResponse(responseCode = "404", description = "El autor no existe")
+  public AutorResponse actualizar(@PathVariable Long id, @Valid @RequestBody AutorRequest request) {
+    return autorService.actualizar(id, request);
+  }
 
-    /** 204 No Content: la operación fue bien y no hay nada que devolver en el cuerpo. */
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Eliminar un autor")
-    @ApiResponse(responseCode = "404", description = "El autor no existe")
-    @ApiResponse(responseCode = "409", description = "El autor tiene libros asociados")
-    public void eliminar(@PathVariable Long id) {
-        autorService.eliminar(id);
-    }
+  /**
+   * 204 No Content: la operación fue bien y no hay nada que devolver en el cuerpo.
+   */
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(summary = "Eliminar un autor")
+  @ApiResponse(responseCode = "404", description = "El autor no existe")
+  @ApiResponse(responseCode = "409", description = "El autor tiene libros asociados")
+  public void eliminar(@PathVariable Long id) {
+    autorService.eliminar(id);
+  }
 }

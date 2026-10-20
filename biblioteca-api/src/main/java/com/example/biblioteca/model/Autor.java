@@ -39,18 +39,18 @@ import lombok.Setter;
 @Builder
 public class Autor {
 
-    /**
-     * Clave primaria. IDENTITY = la base de datos genera el valor automáticamente
-     * (autoincremental: 1, 2, 3...).
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  /**
+   * Clave primaria. IDENTITY = la base de datos genera el valor automáticamente (autoincremental:
+   * 1, 2, 3...).
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    // nullable = false -> la columna es NOT NULL; length = tamaño máximo (VARCHAR(100))
-    @Column(nullable = false, length = 100)
-    private String nombre;
+  // nullable = false -> la columna es NOT NULL; length = tamaño máximo (VARCHAR(100))
+  @Column(nullable = false, length = 100)
+  private String nombre;
 
-    @Column(length = 50)
-    private String nacionalidad;
+  @Column(length = 50)
+  private String nacionalidad;
 }
