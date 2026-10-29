@@ -9,11 +9,11 @@
     <version>4.1.2</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.salesianos.dam</groupId>
+  <groupId>com.salesianostriana.dam</groupId>
   <artifactId>02_SpringDataJpa</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>02_SpringDataJpa</name>
-  <description>02_SpringDataJpa</description>
+  <name/>
+  <description/>
   <url/>
   <licenses>
     <license/>

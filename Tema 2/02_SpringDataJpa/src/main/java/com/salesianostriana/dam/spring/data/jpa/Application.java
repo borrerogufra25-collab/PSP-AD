@@ -1,4 +1,4 @@
-package com.salesianos.dam.springdatajpa;
+package com.salesianostriana.dam.spring.data.jpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
