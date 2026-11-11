@@ -1,10 +1,13 @@
 package com.salesianos.triana.pruebascurso.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +31,10 @@ public class Producto {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", nullable = false)
   private Long id;
+
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "categoria_id")
+  private Categoria categoria;
 
   @Override
   public final boolean equals(Object o) {
