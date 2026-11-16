@@ -2,6 +2,7 @@ package com.ejemplo.repositorio;
 
 import com.ejemplo.modelo.*;
 import com.ejemplo.dto.ResumenPedidoDTO;
+import org.antlr.v4.runtime.atn.SemanticContext.AND;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.*;
@@ -19,9 +20,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
    * Se puede usar JPQL o derivadas, y hay que usar grafos de entidad con subgrafo
    * */
 
-  @EntityGraph(attributePaths = {"direccion", "pedidos", "lineasPedido", "producto", "categoria"})
-  @Query("SELECT c FROM Cliente c where c.pedidos = TRUE ")
-  Optional<Cliente> findClientesPedidosPendiente(@Param("precio"));
+  @EntityGraph(value = "Cliente.pedidosPendientes")
+  @Query("SELECT DISTINCT c FROM Cliente c JOIN c.pedidos p WHERE p.estado = 'PENDIENTE' AND p.total > :importe")
+  List<Cliente> findClientesConPedidosPendientesSuperioresA(
+      @Param("importe") BigDecimal importe);
+
 
   @EntityGraph(attributePaths = {"direccion"})
   Optional<Cliente> findWithDireccionByEmail(String email);
