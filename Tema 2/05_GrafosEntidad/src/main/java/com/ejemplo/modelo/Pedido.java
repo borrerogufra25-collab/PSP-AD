@@ -25,15 +25,20 @@ public class Pedido {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   @Column(nullable = false)
   private LocalDateTime fecha;
+
   @Column(nullable = false, precision = 12, scale = 2)
   private BigDecimal total;
+
   @Column(nullable = false)
   private String estado;
+
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "cliente_id", nullable = false)
   private Cliente cliente;
+
   @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private java.util.List<LineaPedido> lineas = new java.util.ArrayList<>();
 

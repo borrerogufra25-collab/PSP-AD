@@ -11,15 +11,20 @@ public class Cliente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   @Column(nullable = false)
   private String nombre;
+
   @Column(nullable = false, unique = true)
   private String email;
+
   @Column(nullable = false)
   private boolean activo;
+
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "direccion_id")
   private Direccion direccion;
+
   @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
   private java.util.List<Pedido> pedidos = new java.util.ArrayList<>();
 

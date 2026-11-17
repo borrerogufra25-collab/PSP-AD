@@ -11,6 +11,30 @@ import java.time.LocalDateTime;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
+  //Versión @Query
+  @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
+  @Query("SELECT p FROM Pedido p " + "WHERE p.cliente.activo = true "
+      + "AND LOWER(p.cliente.direccion.ciudad) = LOWER(:ciudad) "
+      + "AND p.fecha BETWEEN :desde AND :hasta " + "AND p.estado IN :estados "
+      + "ORDER BY p.fecha ASC, p.id ASC")
+  List<Pedido> buscarPedidosParaLogistica(
+      @Param("ciudad") String ciudad,
+      @Param("desde") LocalDateTime desde,
+      @Param("hasta") LocalDateTime hasta,
+      @Param("estados") Collection<String> estados);
+
+  //Versión IA
+  @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
+  List<Pedido> findByCliente_ActivoTrueAndCliente_DireccionPedidos_CiudadIgnoreCaseAndFechaBetweenAndEstadoInOrderByFechaAscIdAsc(
+      boolean clienteActivo, LocalDateTime fechaAfter, LocalDateTime fechaBefore,
+      Collection<String> estados);
+
+  //Versión Fran
+  @EntityGraph(attributePaths = "cliente.direccion")
+  List<Pedido> findByCliente_ActivoAndCliente_DireccionAndFechaOrderByFechaAsc(
+      boolean clienteActivo, Direccion clienteDireccion, LocalDateTime fecha);
+
+
   @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
   List<Pedido> findByEstado(String estado);
 
