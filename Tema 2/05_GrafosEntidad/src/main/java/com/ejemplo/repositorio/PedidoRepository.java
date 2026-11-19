@@ -1,5 +1,4 @@
 package com.ejemplo.repositorio;
-
 import com.ejemplo.modelo.*;
 import com.ejemplo.dto.ResumenPedidoDTO;
 import org.springframework.data.jpa.repository.*;
@@ -10,78 +9,53 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
+ @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
+ List<Pedido> findByEstado(String estado);
 
-  //Versión @Query
-  @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
-  @Query("SELECT p FROM Pedido p " + "WHERE p.cliente.activo = true "
-      + "AND LOWER(p.cliente.direccion.ciudad) = LOWER(:ciudad) "
-      + "AND p.fecha BETWEEN :desde AND :hasta " + "AND p.estado IN :estados "
-      + "ORDER BY p.fecha ASC, p.id ASC")
-  List<Pedido> buscarPedidosParaLogistica(
-      @Param("ciudad") String ciudad,
-      @Param("desde") LocalDateTime desde,
-      @Param("hasta") LocalDateTime hasta,
-      @Param("estados") Collection<String> estados);
+ @Override
+ @EntityGraph(attributePaths = {"cliente", "lineas.producto"})
+ Optional<Pedido> findById(Long id);
 
-  //Versión IA
-  @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
-  List<Pedido> findByCliente_ActivoTrueAndCliente_DireccionPedidos_CiudadIgnoreCaseAndFechaBetweenAndEstadoInOrderByFechaAscIdAsc(
-      boolean clienteActivo, LocalDateTime fechaAfter, LocalDateTime fechaBefore,
-      Collection<String> estados);
+ @EntityGraph(attributePaths = {"lineas.producto.etiquetas"})
+ @Query("SELECT p FROM Pedido p WHERE p.total > :minimo")
+ List<Pedido> buscarPedidosGrandesConEtiquetas(@Param("minimo") BigDecimal minimo);
 
-  //Versión Fran
-  @EntityGraph(attributePaths = "cliente.direccion")
-  List<Pedido> findByCliente_ActivoAndCliente_DireccionAndFechaOrderByFechaAsc(
-      boolean clienteActivo, Direccion clienteDireccion, LocalDateTime fecha);
+ @EntityGraph(value = "Pedido.completoConDetalles", type = EntityGraph.EntityGraphType.FETCH)
+ Optional<Pedido> findCompletoById(Long id);
 
+ @EntityGraph(value = "Pedido.completoConDetalles")
+ List<Pedido> findCompletoByClienteId(Long clienteId);
 
-  @EntityGraph(attributePaths = {"cliente.direccion", "lineas.producto.categoria"})
-  List<Pedido> findByEstado(String estado);
+ @EntityGraph(value = "Pedido.completoConDetalles", type = EntityGraph.EntityGraphType.LOAD)
+ Optional<Pedido> findCompletoLoadById(Long id);
 
-  @Override
-  @EntityGraph(attributePaths = {"cliente", "lineas.producto"})
-  Optional<Pedido> findById(Long id);
+ @Query("SELECT p FROM Pedido p WHERE p.fecha BETWEEN :inicio AND :fin AND p.estado IN :estados")
+    List<Pedido> buscarPorRangoFechasYEstados(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fin") LocalDateTime fin,
+            @Param("estados") Collection<String> estados
+    );
 
-  @EntityGraph(attributePaths = {"lineas.producto.etiquetas"})
-  @Query("SELECT p FROM Pedido p WHERE p.total > :minimo")
-  List<Pedido> buscarPedidosGrandesConEtiquetas(@Param("minimo") BigDecimal minimo);
+ @Query("SELECT new com.ejemplo.dto.ResumenPedidoDTO(p.id, p.cliente.nombre, p.total) " +
+           "FROM Pedido p " +
+           "WHERE p.estado = :estado")
+    List<ResumenPedidoDTO> obtenerResumenesPorEstado(@Param("estado") String estado);
 
-  @EntityGraph(value = "Pedido.completoConDetalles", type = EntityGraph.EntityGraphType.FETCH)
-  Optional<Pedido> findCompletoById(Long id);
+ @Query("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.estado = :estado")
+    List<Pedido> buscarPedidosConClienteCargado(@Param("estado") String estado);
 
-  @EntityGraph(value = "Pedido.completoConDetalles")
-  List<Pedido> findCompletoByClienteId(Long clienteId);
+ @Query("SELECT p FROM Pedido p WHERE p.estado IN :estados")
+    List<Pedido> buscarPorEstados(@Param("estados") Collection<String> estados);
 
-  @EntityGraph(value = "Pedido.completoConDetalles", type = EntityGraph.EntityGraphType.LOAD)
-  Optional<Pedido> findCompletoLoadById(Long id);
+ @Query("SELECT p FROM Pedido p WHERE p.fecha BETWEEN :desde AND :hasta AND p.total >= :totalMinimo")
+    List<Pedido> buscarPedidosEnRangoYTotal(
+            @Param("desde") LocalDateTime desde,
+            @Param("hasta") LocalDateTime hasta,
+            @Param("totalMinimo") BigDecimal totalMinimo
+    );
 
-  @Query("SELECT p FROM Pedido p WHERE p.fecha BETWEEN :inicio AND :fin AND p.estado IN :estados")
-  List<Pedido> buscarPorRangoFechasYEstados(
-      @Param("inicio") LocalDateTime inicio,
-      @Param("fin") LocalDateTime fin,
-      @Param("estados") Collection<String> estados
-  );
-
-  @Query("SELECT new com.ejemplo.dto.ResumenPedidoDTO(p.id, p.cliente.nombre, p.total) " +
-      "FROM Pedido p " +
-      "WHERE p.estado = :estado")
-  List<ResumenPedidoDTO> obtenerResumenesPorEstado(@Param("estado") String estado);
-
-  @Query("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.estado = :estado")
-  List<Pedido> buscarPedidosConClienteCargado(@Param("estado") String estado);
-
-  @Query("SELECT p FROM Pedido p WHERE p.estado IN :estados")
-  List<Pedido> buscarPorEstados(@Param("estados") Collection<String> estados);
-
-  @Query("SELECT p FROM Pedido p WHERE p.fecha BETWEEN :desde AND :hasta AND p.total >= :totalMinimo")
-  List<Pedido> buscarPedidosEnRangoYTotal(
-      @Param("desde") LocalDateTime desde,
-      @Param("hasta") LocalDateTime hasta,
-      @Param("totalMinimo") BigDecimal totalMinimo
-  );
-
-  @Query("SELECT new com.ejemplo.dto.ResumenPedidoDTO(p.id, p.cliente.nombre, p.total, p.fecha) " +
-      "FROM Pedido p " +
-      "WHERE p.estado = :estado")
-  List<ResumenPedidoDTO> obtenerResumenesConFechaPorEstado(@Param("estado") String estado);
+ @Query("SELECT new com.ejemplo.dto.ResumenPedidoDTO(p.id, p.cliente.nombre, p.total, p.fecha) " +
+           "FROM Pedido p " +
+           "WHERE p.estado = :estado")
+    List<ResumenPedidoDTO> obtenerResumenesConFechaPorEstado(@Param("estado") String estado);
 }
