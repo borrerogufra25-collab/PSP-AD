@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0365686b-2076-4449-bf9e-7e90b1dbb4a3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../02.1Ejercicio/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02.1Ejercicio/.idea/02.1Ejercicio.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02.1Ejercicio/.idea/material_theme_project_new.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02.1Ejercicio/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02.1Ejercicio/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02.1Ejercicio/.idea/vcs.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "borrerogufra25-collab"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/borrerogufra25-collab/PSP-AD.git",
+    "accountId": "7b876413-0b72-4967-a377-f1d0e061a3dd"
+  }
+}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000003258158" />
+      <entry key="S2" value="1.0057246171313028" />
+      <entry key="S5" value="1.2655751469779757" />
+      <entry key="S10" value="2.13449395460679" />
+      <entry key="S30" value="5.1786625803605695" />
+      <entry key="S60" value="8.557850297959336" />
+      <entry key="M2" value="12.398793148079609" />
+      <entry key="M5" value="16.292789044095663" />
+      <entry key="M10" value="18.009450840409592" />
+      <entry key="M15" value="18.640236418310288" />
+      <entry key="M30" value="19.303134172971138" />
+      <entry key="H1" value="19.647200676417395" />
+      <entry key="H2" value="19.822493286367948" />
+      <entry key="H4" value="19.910967923513457" />
+      <entry key="D1" value="19.985122442239327" />
+      <entry key="W1" value="19.997873680293377" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="7.6864609500815E-79" />
+      <entry key="MS500" value="2.395064037401842E-16" />
+      <entry key="S2" value="1.5735298095295762E-4" />
+      <entry key="S5" value="0.0455892549824815" />
+      <entry key="S10" value="0.37430561201574986" />
+      <entry key="S30" value="2.4502495903617985" />
+      <entry key="S60" value="5.050659993135256" />
+      <entry key="M2" value="7.859696971615724" />
+      <entry key="M5" value="10.551783255272694" />
+      <entry key="M10" value="11.69782414171825" />
+      <entry key="M15" value="12.11343669945701" />
+      <entry key="M30" value="12.547203742822813" />
+      <entry key="H1" value="12.771166851622649" />
+      <entry key="H2" value="12.88496747217065" />
+      <entry key="H4" value="12.94232883811441" />
+      <entry key="D1" value="12.990366548421843" />
+      <entry key="W1" value="12.998623262850316" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.8293195458144417" />
+      <entry key="MS500" value="0.963261894084164" />
+      <entry key="S2" value="0.9949446616193116" />
+      <entry key="S5" value="1.272695214721286" />
+      <entry key="S10" value="2.4106407076757104" />
+      <entry key="S30" value="7.45866942750123" />
+      <entry key="S60" value="13.43030322986135" />
+      <entry key="M2" value="20.11191946486736" />
+      <entry key="M5" value="26.761423368718987" />
+      <entry key="M10" value="29.660150280993236" />
+      <entry key="M15" value="30.720884286338254" />
+      <entry key="M30" value="31.83321892924367" />
+      <entry key="H1" value="32.409619321244996" />
+      <entry key="H2" value="32.703038496304714" />
+      <entry key="H4" value="32.85107346604786" />
+      <entry key="D1" value="32.97511674119664" />
+      <entry key="W1" value="32.99644372287105" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3MTEI53wNAYQPr0OK79ypLsvJ7T" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="00.1_APIREST" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="00.1_APIREST" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="apiRest" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.salesianos.triana.apirest.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-ac68fc9d2b05-intellij.indexing.shared.core-IU-263.7307.200" />
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-IU-263.7307.200" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0365686b-2076-4449-bf9e-7e90b1dbb4a3" name="Changes" comment="" />
+      <created>1795366074864</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1795366074864</updated>
+      <workItem from="1795366075906" duration="356000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
